@@ -1,10 +1,11 @@
-package com.example.firebasecommunityapp.ui.activity
+package com.example.firebasecommunityapp.presentation.view.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.firebasecommunityapp.R
+import com.example.firebasecommunityapp.presentation.view.login.IntroActivity
 
 @Suppress("DEPRECATION")
 class SplashActivity : AppCompatActivity() {

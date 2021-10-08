@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name=".ui.activity.LoginActivity"></activity>
-        <activity android:name=".ui.activity.IntroActivity" />
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity android:name="com.example.firebasecommunityapp.presentation.view.signup.activity.SignUpActivity"></activity>
+        <activity android:name="com.example.firebasecommunityapp.presentation.view.login.IntroActivity" />
+        <activity android:name=".presentation.view.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name="com.example.firebasecommunityapp.presentation.view.main.activity.MainActivity" />
     </application>
 
 </manifest>
