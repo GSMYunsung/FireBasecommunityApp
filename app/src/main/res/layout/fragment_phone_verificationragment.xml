@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="nextFragment"
+            type="com.example.firebasecommunityapp.presentation.view.signup.fragment.PhoneVerificationragment" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".presentation.view.signup.fragment.PhoneVerificationragment">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/sb_m"
+            android:text="전화번호 인증"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#bcbcbc"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <LinearLayout
+            android:id="@+id/phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="56dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+            <EditText
+                android:layout_marginTop="3dp"
+                android:id="@+id/phone_editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:background="@drawable/button_back"
+                android:hint="전화번호를 입력해주세요!"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#bcbcbc"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/phone_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_back"
+                android:fontFamily="@font/sb_m"
+                android:text="인증하기"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/sb_l"
+            android:text="전화번호는 -를 빼고 입력해 주세요!"
+            android:textColor="#999999"
+            app:layout_constraintStart_toStartOf="@+id/phone_layout"
+            app:layout_constraintTop_toBottomOf="@+id/phone_layout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/phone_layout"
+            app:layout_constraintStart_toStartOf="@+id/phone_layout"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <EditText
+                android:id="@+id/phoneCheck_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_back"
+                android:hint="인증번호를 입력해주세요"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#bcbcbc"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/phoneCheck_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_back"
+                android:fontFamily="@font/sb_m"
+                android:padding="15dp"
+                android:text="확인하기"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phoneCheck_editText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:onClick="@{() -> nextFragment.goToSetIdPassword()}"
+            android:textSize="15dp"
+            android:padding="25dp"
+            android:fontFamily="@font/sb_m"
+            android:background="@color/backcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="다음으로"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/phoneVerificationragment3">
+    <fragment
+        android:id="@+id/phoneVerificationragment3"
+        android:name="com.example.firebasecommunityapp.presentation.view.signup.fragment.PhoneVerificationragment"
+        android:label="fragment_phone_verificationragment"
+        tools:layout="@layout/fragment_phone_verificationragment" >
+        <action
+            android:id="@+id/action_phoneVerificationragment3_to_setIdPasswordFragment2"
+            app:destination="@id/setIdPasswordFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/setIdPasswordFragment2"
+        android:name="com.example.firebasecommunityapp.presentation.view.signup.fragment.SetIdPasswordFragment"
+        android:label="fragment_set_id_password"
+        tools:layout="@layout/fragment_set_id_password" >
+        <action
+            android:id="@+id/action_setIdPasswordFragment2_to_setProfileFragment2"
+            app:destination="@id/setProfileFragment2" />
+        <action
+            android:id="@+id/action_setIdPasswordFragment2_to_phoneVerificationragment3"
+            app:destination="@id/phoneVerificationragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/setProfileFragment2"
+        android:name="com.example.firebasecommunityapp.presentation.view.signup.fragment.SetProfileFragment"
+        android:label="fragment_set_profile"
+        tools:layout="@layout/fragment_set_profile" >
+        <action
+            android:id="@+id/action_setProfileFragment2_to_setIdPasswordFragment2"
+            app:destination="@id/setIdPasswordFragment2" />
+    </fragment>
+</navigation>
