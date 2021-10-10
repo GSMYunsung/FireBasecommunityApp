@@ -103,11 +103,12 @@
             app:layout_constraintTop_toBottomOf="@+id/phone_layout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="50dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
             app:layout_constraintEnd_toEndOf="@+id/phone_layout"
             app:layout_constraintStart_toStartOf="@+id/phone_layout"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -127,16 +128,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:layout_marginTop="20dp"
                 android:id="@+id/phoneCheck_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button_back"
                 android:fontFamily="@font/sb_m"
+                android:onClick="@{nextFragment::checkPhoneAuthCode}"
                 android:padding="15dp"
                 android:text="확인하기"
-                android:textSize="15dp"
                 android:textColor="@color/black"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -145,14 +147,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:layout_margin="3dp"
+            android:id="@+id/next_button"
             android:onClick="@{() -> nextFragment.goToSetIdPassword()}"
             android:textSize="15dp"
             android:padding="25dp"
             android:fontFamily="@font/sb_m"
-            android:background="@color/backcolor"
+            android:background="@drawable/button_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="다음으로"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
