@@ -12,6 +12,7 @@ import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.FragmentSetProfileBinding
 import com.example.firebasecommunityapp.presentation.view.main.activity.MainActivity
 import com.example.firebasecommunityapp.presentation.view.signup.activity.SignUpActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class SetProfileFragment : Fragment() {
     private lateinit var binding : FragmentSetProfileBinding
