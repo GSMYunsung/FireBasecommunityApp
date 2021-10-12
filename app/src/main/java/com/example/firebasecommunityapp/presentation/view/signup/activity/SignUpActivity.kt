@@ -6,6 +6,10 @@ import com.example.firebasecommunityapp.R
 
 class SignUpActivity : AppCompatActivity() {
 
+    override fun onBackPressed() {
+        //super.onBackPressed();
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
