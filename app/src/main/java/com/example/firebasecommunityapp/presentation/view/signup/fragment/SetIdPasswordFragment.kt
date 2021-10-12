@@ -22,8 +22,7 @@ class SetIdPasswordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_set_id_password, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_id_password, container, false)
 
         binding.nextFragment = this
 

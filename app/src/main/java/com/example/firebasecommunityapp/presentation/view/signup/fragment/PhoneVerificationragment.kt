@@ -1,37 +1,34 @@
 package com.example.firebasecommunityapp.presentation.view.signup.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.FragmentPhoneVerificationragmentBinding
-import com.google.firebase.FirebaseApiNotAvailableException
+import com.example.firebasecommunityapp.presentation.view.signup.SignUpViewmodel
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import java.util.concurrent.TimeUnit
 
 class PhoneVerificationragment : Fragment() {
     private lateinit var callbacks : PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var binding : FragmentPhoneVerificationragmentBinding
     private var verificationCode : String = ""
-    private var isVerificationSussed = false
-    var checkSendCodeIs = false
+    private val signInViewModel by activityViewModels<SignUpViewmodel>()
     private lateinit var resendingToken : PhoneAuthProvider.ForceResendingToken
     private var auth : FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -65,7 +62,7 @@ class PhoneVerificationragment : Fragment() {
                 //번호는 확인 되었으나 인증코드를 입력해야 하는 상태
                verificationCode = verificationId
                 resendingToken = forceToken
-                checkSendCodeIs = true
+                signInViewModel.checkSendCode()
 
             }
         }
@@ -77,7 +74,7 @@ class PhoneVerificationragment : Fragment() {
 
 
     fun goToSetIdPassword(){
-        if(isVerificationSussed){
+        if(signInViewModel.checkGoNext.value == true){
             findNavController().navigate(R.id.action_phoneVerificationragment3_to_setIdPasswordFragment2)
         }
         else{
@@ -87,7 +84,7 @@ class PhoneVerificationragment : Fragment() {
     }
 
     fun checkPhoneAuthCode(view : View){
-        if(checkSendCodeIs){
+        if(signInViewModel.checkSendCodeIs.value == true){
             if(TextUtils.isEmpty(binding.phoneCheckEditText.text)){
                 Toast.makeText(activity,"인증번호를 입력해주세요!",Toast.LENGTH_SHORT).show()
             }
@@ -103,9 +100,8 @@ class PhoneVerificationragment : Fragment() {
         }
     }
 
-    @SuppressLint("ResourceAsColor")
     fun setNextButtonColor(){
-        if(isVerificationSussed){binding.nextButton.setBackgroundColor(R.color.backcolor)}
+        if(signInViewModel.checkGoNext.value == true){binding.nextButton.setBackgroundResource(R.color.backcolor)}
     }
 
     private fun codeCheckAndInner(code: String) {
@@ -117,11 +113,28 @@ class PhoneVerificationragment : Fragment() {
         auth.signInWithCredential(certification)
             ?.addOnCompleteListener(requireActivity()){ task ->
                 if(task.isSuccessful){
-                    val user = task.result?.user
-                    isVerificationSussed = true
+                    signInViewModel.goNextPage()
                     setNextButtonColor()
+                    signInViewModel.getPhoneNumber(binding.phoneEditText.text.toString())
                     Toast.makeText(activity,"인증이 완료되었습니다!",Toast.LENGTH_SHORT).show()
+
+
+                    //전화번호 중복 확인
+                    signInViewModel.phoneNumberCheckNextCallUserInfo().addListenerForSingleValueEvent(
+                        object : ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                signInViewModel.phoneNumberDoubleCheck(snapshot)
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Log.e("error",error.toString())
+                            }
+
+                        }
+                    )
+
                 }
+
                 else{
                     Log.w("errorLog",task.exception)
                         Toast.makeText(requireContext(),"인증번호가 잘못되었습니다.",Toast.LENGTH_SHORT)
