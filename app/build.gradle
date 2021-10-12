@@ -2,6 +2,7 @@
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
 }
 
@@ -37,12 +38,22 @@ android {
         enabled true
     }
 
+    kapt {
+        correctErrorTypes true
+    }
+
     buildFeatures {
         viewBinding true
     }
 }
 
 dependencies {
+
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:2.35.1"
+    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.4'
+    kapt "com.google.dagger:hilt-android-compiler:2.35.1"
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
     //firebase
     implementation platform('com.google.firebase:firebase-bom:28.4.1')
