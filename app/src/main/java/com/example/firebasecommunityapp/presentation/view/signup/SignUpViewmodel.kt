@@ -1,24 +1,30 @@
 package com.example.firebasecommunityapp.presentation.view.signup
 
-import android.net.Uri
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.firebasecommunityapp.data.model.SingUp
+import com.example.firebasecommunityapp.domain.usecase.CheckUserIdInfoUseCase
 import com.example.firebasecommunityapp.domain.usecase.CheckUserInfoUseCase
+import com.example.firebasecommunityapp.presentation.wiget.utils.UserProfile
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewmodel @Inject constructor(
-    private val checkUserInfoUseCase: CheckUserInfoUseCase
+    private var auth: FirebaseAuth,
+    private val checkUserInfoUseCase: CheckUserInfoUseCase,
+    private val checkUserIdInfoUseCase: CheckUserIdInfoUseCase
 ) : ViewModel() {
 
     private var phoneNumber : String? = null
     private var nickName : String? = null
     private var password : String? = null
     private var id : String? = null
-    private var profilePicture : Uri? = null
+    private var profilePicture : String? = null
 
     //회원가입중 다음으로 버튼을 활성화
     val checkGoNext: LiveData<Boolean> get() = _checkGoNext
@@ -52,11 +58,29 @@ class SignUpViewmodel @Inject constructor(
 
     fun phoneNumberCheckNextCallUserInfo() = checkUserInfoUseCase.excute()
 
+    fun idCheckNextCallUserInfo(id : String) = checkUserIdInfoUseCase.excute(id)
+
     fun phoneNumberDoubleCheck(snapshot: DataSnapshot){
-       // if(snapshot.child("userInformation").child("callNumber").getValue())
+       if(snapshot.child(auth.uid.toString()).value != null){
+            val userSignUpmModel = snapshot.child(auth.uid.toString()).getValue(SingUp::class.java)
+
+            UserProfile.apply {
+                phoneNumber = userSignUpmModel?.phoneNumber
+                nickName = userSignUpmModel?.nickName
+                password = userSignUpmModel?.password
+                id = userSignUpmModel?.id
+                profilePicture = userSignUpmModel?.profilePicture?.toUri()
+            }
+
+           //팝업창 띄우고 바로 메인화면 ㄱ 로직
+
+       }
+        else{
+           goNextPage()
+       }
     }
 
-    fun getNicknameAndProfileP(nickName : String, profilePicture : Uri){
+    fun getNicknameAndProfileP(nickName : String, profilePicture : String){
         this.nickName = nickName
         this.profilePicture = profilePicture
     }
