@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.presentation.view.login.IntroActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -22,8 +22,10 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class PhoneVerificationragment : Fragment() {
     private lateinit var callbacks : PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private lateinit var binding : FragmentPhoneVerificationragmentBinding

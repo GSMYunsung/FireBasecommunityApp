@@ -22,4 +22,6 @@ class FireBaseDataSourceModel {
         firebaseStorage : FirebaseStorage,
         fireStore : FirebaseFirestore
     ) = RemoteFirebaseDataSource(firebaseAuth,firebaseRtdb,firebaseStorage,fireStore)
+
+    
 }

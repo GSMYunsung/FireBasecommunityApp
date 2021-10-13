@@ -5,9 +5,9 @@ import com.example.firebasecommunityapp.domain.repository.FirebaseRepository
 import com.google.firebase.database.DatabaseReference
 import javax.inject.Inject
 
-class RemoteFirebaseDataSourceImpl @Inject constructor(
+class RemoteFirebaseRepositoryImpl @Inject constructor(
     private val fireBaseSource: RemoteFirebaseDataSource
 ) : FirebaseRepository {
     override fun callUserInfo(): DatabaseReference = fireBaseSource.callUserInfo()
-
+    override fun idUserInfo(id : String): DatabaseReference = fireBaseSource.idUserInfo(id)
 }

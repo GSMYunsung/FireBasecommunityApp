@@ -13,7 +13,9 @@ import com.example.firebasecommunityapp.databinding.FragmentSetProfileBinding
 import com.example.firebasecommunityapp.presentation.view.main.activity.MainActivity
 import com.example.firebasecommunityapp.presentation.view.signup.activity.SignUpActivity
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SetProfileFragment : Fragment() {
     private lateinit var binding : FragmentSetProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
