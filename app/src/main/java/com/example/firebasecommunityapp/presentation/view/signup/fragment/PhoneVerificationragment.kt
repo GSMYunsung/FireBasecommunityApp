@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class PhoneVerificationragment : Fragment() {
@@ -147,13 +148,17 @@ class PhoneVerificationragment : Fragment() {
     }
 
     fun clickPhoneAuthCode(view : View){
+        val phoneNumber = binding.phoneEditText.text
         if(TextUtils.isEmpty(binding.phoneEditText.text)){
             Toast.makeText(activity,"전화번호를 입력해주세요!",Toast.LENGTH_SHORT).show()
         }
+        else if(!Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", phoneNumber)){
+            Toast.makeText(activity,"올바른 핸드폰 번호가 아닙니다.",Toast.LENGTH_SHORT).show()
+        }
+
         else{
             Toast.makeText(activity, "잠시만 기다려 주세요!", Toast.LENGTH_SHORT).show()
-            val phoneNumber = binding.phoneEditText.text.substring(1)
-            Log.d("PhoneNumber",phoneNumber)
+            Log.d("PhoneNumber",phoneNumber.substring(1))
             val options = auth.let {
                 PhoneAuthOptions.newBuilder(it)
                         //$phoneNumber
