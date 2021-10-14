@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class SetIdPasswordFragment : Fragment() {
@@ -54,8 +55,14 @@ class SetIdPasswordFragment : Fragment() {
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
 
+                        val password = binding.checkPasswordEditText.text
+                        val id = binding.checkIdEditText.text
+
                         if(snapshot.getValue() != null){
                             Toast.makeText(activity,"이미 존재하는 id 입니다. 다른 id를 입력해주세요!",Toast.LENGTH_SHORT).show()
+                        }
+                        else if(!Pattern.matches("^[a-zA-Z]{1}[a-zA-Z0-9_]{6,10}$",id)){
+                                Toast.makeText(activity,"형식에 맞지않는 id 입니다. 다시 입력해주세요!",Toast.LENGTH_SHORT).show()
                         }
                         else{
                             Toast.makeText(activity,"사용가능한 id 입니다.",Toast.LENGTH_SHORT).show()
@@ -69,6 +76,10 @@ class SetIdPasswordFragment : Fragment() {
                 }
             )
         }
+    }
+
+    fun clickPasswordCheck(){
+
     }
 
     fun getIdAndPassword(){
