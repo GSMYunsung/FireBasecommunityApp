@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.firebasecommunityapp.data.model.SingUp
+import com.example.firebasecommunityapp.domain.repository.FirebaseRepository
 import com.example.firebasecommunityapp.domain.usecase.CheckUserIdInfoUseCase
 import com.example.firebasecommunityapp.domain.usecase.CheckUserInfoUseCase
 import com.example.firebasecommunityapp.presentation.wiget.utils.UserProfile
