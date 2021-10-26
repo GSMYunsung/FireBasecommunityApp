@@ -31,6 +31,17 @@ class SignUpViewmodel @Inject constructor(
     val checkGoNext: LiveData<Boolean> get() = _checkGoNext
     private val _checkGoNext = MutableLiveData<Boolean>()
 
+    //현재 사용자가 설정한 비밀번호가 정상적인 비밀번호??
+
+    val checkUserPasswordIs: LiveData<Boolean> get() = _checkUserPasswordIs
+    private val _checkUserPasswordIs = MutableLiveData<Boolean>()
+
+    //현재 사용자가 설정한 비밀번호가 정상적인 아이디??
+
+    val checkUserIdIs: LiveData<Boolean> get() = _checkUserIdIs
+    private val _checkUserIdIs = MutableLiveData<Boolean>()
+
+
     //코드가 보내졌는지 확인하는 변수
     val checkSendCodeIs : LiveData<Boolean> get() = _checkSendCodeIs
     private val _checkSendCodeIs = MutableLiveData<Boolean>()
@@ -38,6 +49,19 @@ class SignUpViewmodel @Inject constructor(
     init {
         _checkGoNext.value = false
         _checkSendCodeIs.value = false
+    }
+
+    fun checkPasswordIs(){
+        _checkUserPasswordIs.value = true
+    }
+
+    fun checkIdPasswordChange(){
+        _checkUserIdIs.value = false
+        _checkUserPasswordIs.value = false
+    }
+
+    fun checkIdIs(){
+        _checkUserIdIs.value = true
     }
 
     fun checkSendCode(){

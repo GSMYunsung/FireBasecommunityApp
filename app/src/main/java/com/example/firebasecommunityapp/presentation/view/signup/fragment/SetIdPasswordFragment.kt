@@ -42,30 +42,31 @@ class SetIdPasswordFragment : Fragment() {
         return binding.root
     }
 
-    fun goToSetProfile(){
-        findNavController().navigate(R.id.action_setIdPasswordFragment2_to_setProfileFragment2)
-    }
-
     fun clickIdCheck(){
         if(TextUtils.isEmpty(binding.checkIdEditText.text)){
             Toast.makeText(activity,"ID를 입력해주세요!", Toast.LENGTH_SHORT).show()
         }
         else{
+
+            setNextButtonColor()
+
             signInViewModel.idCheckNextCallUserInfo(binding.checkIdEditText.text.toString()).addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
 
-                        val password = binding.checkPasswordEditText.text
                         val id = binding.checkIdEditText.text
 
                         if(snapshot.getValue() != null){
                             Toast.makeText(activity,"이미 존재하는 id 입니다. 다른 id를 입력해주세요!",Toast.LENGTH_SHORT).show()
+                            signInViewModel.checkIdPasswordChange()
                         }
                         else if(!Pattern.matches("^[a-zA-Z]{1}[a-zA-Z0-9_]{6,10}$",id)){
                                 Toast.makeText(activity,"형식에 맞지않는 id 입니다. 다시 입력해주세요!",Toast.LENGTH_SHORT).show()
+                            signInViewModel.checkIdPasswordChange()
                         }
                         else{
                             Toast.makeText(activity,"사용가능한 id 입니다.",Toast.LENGTH_SHORT).show()
+                            signInViewModel.checkIdIs()
                         }
                     }
 
@@ -80,13 +81,37 @@ class SetIdPasswordFragment : Fragment() {
 
     fun clickPasswordCheck(){
 
+
+        val password = binding.checkPasswordEditText.text
+
+        setNextButtonColor()
+
+        if(TextUtils.isEmpty(binding.checkPasswordEditText.text.toString()) && TextUtils.isEmpty(binding.checkPasswordAgainEditText.text.toString())){
+            Toast.makeText(activity,"비밀번호칸과 비밀번호 확인칸 모두 입력해주세요!",Toast.LENGTH_SHORT).show()
+            signInViewModel.checkIdPasswordChange()
+        }
+        else if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{6,12}.\$",password)){
+            Toast.makeText(activity,"비밀번호 형식에 맞지 않습니다. 다시한번 입력해주세요!",Toast.LENGTH_SHORT).show()
+            signInViewModel.checkIdPasswordChange()
+        }
+        else{
+            Toast.makeText(activity,"사용가능한 비밀번호입니다!",Toast.LENGTH_SHORT).show()
+            signInViewModel.checkPasswordIs()
+        }
     }
 
     fun getIdAndPassword(){
 
+        if(signInViewModel.checkUserPasswordIs.value == true && signInViewModel.checkUserIdIs.value == true){
+            signInViewModel.getIdAndPassword(binding.checkIdEditText.text.toString(),binding.checkPasswordEditText.text.toString())
+            findNavController().navigate(R.id.action_setIdPasswordFragment2_to_setProfileFragment2)
+        }
+        else{
+            Toast.makeText(activity,"우선 인증을 완료해주세요!",Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun setNextButtonColor(){
-        if(signInViewModel.checkGoNext.value == true){binding.nextButton.setBackgroundResource(R.color.backcolor)}
+        if(signInViewModel.checkUserPasswordIs.value == true && signInViewModel.checkUserIdIs.value == true){binding.nextButton.setBackgroundResource(R.color.backcolor)}
     }
 }
