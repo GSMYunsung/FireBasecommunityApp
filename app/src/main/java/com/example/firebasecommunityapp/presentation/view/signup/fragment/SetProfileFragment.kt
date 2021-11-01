@@ -35,6 +35,11 @@ class SetProfileFragment : Fragment() {
 
     }
 
+    fun getUserProfileImage(){
+        tedPermission()
+    }
+
+
     fun goToMain(){
         startActivity(Intent(activity, MainActivity::class.java))
     }
