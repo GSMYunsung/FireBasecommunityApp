@@ -94,6 +94,9 @@ class SetIdPasswordFragment : Fragment() {
             Toast.makeText(activity,"비밀번호 형식에 맞지 않습니다. 다시한번 입력해주세요!",Toast.LENGTH_SHORT).show()
             signInViewModel.checkIdPasswordChange()
         }
+        else if(binding.checkPasswordEditText.text.toString() != binding.checkPasswordAgainEditText.text.toString()){
+            Toast.makeText(activity,"비밀번호 확인칸과 비밀번호칸이 일치하지 않습니다. 다시한번 시도해주세요!",Toast.LENGTH_SHORT).show()
+        }
         else{
             Toast.makeText(activity,"사용가능한 비밀번호입니다!",Toast.LENGTH_SHORT).show()
             signInViewModel.checkPasswordIs()
