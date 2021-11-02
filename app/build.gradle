@@ -47,10 +47,10 @@ android {
     }
 }
 
-dependencies {
 
-    //ted permission
-    implementation "gun0912.ted:tedpermission:2.1.0"
+    dependencies {
+
+     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
     //dagger hilt
     implementation "com.google.dagger:hilt-android:2.35.1"

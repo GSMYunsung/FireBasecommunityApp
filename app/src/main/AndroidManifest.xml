@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:name=".presentation.wiget.JabchwiApplication"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name="com.example.firebasecommunityapp.presentation.view.signup.activity.SignUpActivity"></activity>
+        <activity android:name="com.example.firebasecommunityapp.presentation.view.signup.activity.SignUpActivity">
+        </activity>
         <activity android:name="com.example.firebasecommunityapp.presentation.view.login.IntroActivity" />
         <activity android:name=".presentation.view.splash.SplashActivity">
             <intent-filter>
