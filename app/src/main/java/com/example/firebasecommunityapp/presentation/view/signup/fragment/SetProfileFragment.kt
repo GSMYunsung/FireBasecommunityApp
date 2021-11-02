@@ -116,36 +116,27 @@ class SetProfileFragment : Fragment() {
             Toast.makeText(activity,"닉네임을 입력해주세요!", Toast.LENGTH_SHORT).show()
         }
         else{
-            signInViewModel.nicknameCheckInfo(binding.nicknameEditText.text.toString()).addSnapshotListener(
-                object : ValueEventListener, EventListener<QuerySnapshot> {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if(snapshot.getValue() != null){
-                            Toast.makeText(activity,"이미 존재하는 닉네임 입니다. 다른 닉네임을 입력해주세요!",Toast.LENGTH_SHORT).show()
-                            signInViewModel.checkNickNameProfileChange()
-                        }
-                        else if(!Pattern.matches("^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}\$\n",binding.nicknameEditText.text)){
-                            Toast.makeText(activity,"형식에 맞지않는 id 입니다. 형식에 맞게 다시 입력해주세요",Toast.LENGTH_SHORT).show()
-                            signInViewModel.checkNickNameProfileChange()
-                        }
-                        else{
-                            Toast.makeText(activity,"사용가능한 닉네임 입니다.",Toast.LENGTH_SHORT).show()
-                            signInViewModel.checkNickNameIs()
-                        }
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.e("error",error.toString())
-                    }
-
-                    override fun onEvent(
-                        value: QuerySnapshot?,
-                        error: FirebaseFirestoreException?
-                    ) {
-                       Log.d("ERROR_", "event error : $error")
-                    }
-
+            signInViewModel.nicknameCheckInfo(binding.nicknameEditText.text.toString()).addSnapshotListener { value, error ->
+                if (value != null) {
+                    Toast.makeText(activity, "이미 존재하는 닉네임 입니다. 다른 닉네임을 입력해주세요!", Toast.LENGTH_SHORT)
+                        .show()
+                    signInViewModel.checkNickNameProfileChange()
+                } else if (!Pattern.matches(
+                        "^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}\$\n",
+                        binding.nicknameEditText.text
+                    )
+                ) {
+                    Toast.makeText(
+                        activity,
+                        "형식에 맞지않는 id 입니다. 형식에 맞게 다시 입력해주세요",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    signInViewModel.checkNickNameProfileChange()
+                } else {
+                    Toast.makeText(activity, "사용가능한 닉네임 입니다.", Toast.LENGTH_SHORT).show()
+                    signInViewModel.checkNickNameIs()
                 }
-            )
+            }
         }
     }
 
