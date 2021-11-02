@@ -85,6 +85,8 @@ class SetProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        setNextButtonColor()
+
         when (requestCode){
             2404 -> {
                 proFileUri = data?.data!!
@@ -107,6 +109,9 @@ class SetProfileFragment : Fragment() {
     }
 
     fun nickNameCheck(){
+
+       setNextButtonColor()
+
         if(TextUtils.isEmpty(binding.nicknameEditText.text)){
             Toast.makeText(activity,"닉네임을 입력해주세요!", Toast.LENGTH_SHORT).show()
         }
@@ -156,5 +161,9 @@ class SetProfileFragment : Fragment() {
 
     fun goToMain(){
         startActivity(Intent(activity, MainActivity::class.java))
+    }
+
+    fun setNextButtonColor(){
+        if(signInViewModel.checkUserNicknameIs.value == true && signInViewModel.checkUserPictureIs.value == true){binding.getStartButton.setBackgroundResource(R.color.backcolor)}
     }
 }
