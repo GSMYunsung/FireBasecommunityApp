@@ -92,7 +92,8 @@
                 android:textSize="15dp" />
 
             <Button
-                android:id="@+id/nickname_button"
+                android:onClick="@{() -> startMain.nickNameCheck()}"
+                android:id="@+id/getStart_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -134,7 +135,7 @@
             android:layout_height="wrap_content"
             android:background="@color/backcolor"
             android:fontFamily="@font/sb_m"
-            android:onClick="@{() -> startMain.goToMain()}"
+            android:onClick="@{() -> startMain.getNickname()}"
             android:padding="25dp"
             android:text="시작하기"
             android:textSize="15dp"
