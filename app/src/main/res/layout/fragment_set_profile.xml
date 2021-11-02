@@ -44,6 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
+            android:onClick="@{() -> startMain.getUserProfileImage()}"
             android:id="@+id/profile_imageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -114,15 +115,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nickname_layout" />
 
+        <TextView
+            android:id="@+id/textview4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/sb_l"
+            android:text="※ 닉네임은 다른사람에게 보여지는 이름이니 주의해서 정해주세요"
+            android:textColor="#999999"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
-            android:onClick="@{() -> startMain.goToMain()}"
-            android:textSize="15dp"
-            android:padding="25dp"
-            android:fontFamily="@font/sb_m"
-            android:background="@color/backcolor"
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/backcolor"
+            android:fontFamily="@font/sb_m"
+            android:onClick="@{() -> startMain.goToMain()}"
+            android:padding="25dp"
             android:text="시작하기"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

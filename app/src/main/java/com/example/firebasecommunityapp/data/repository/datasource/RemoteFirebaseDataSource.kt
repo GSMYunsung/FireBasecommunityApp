@@ -14,4 +14,5 @@ class RemoteFirebaseDataSource @Inject constructor(
 ) {
     fun callUserInfo() = firebaseRtdb.reference.child("userInformation").child("callNumber")
     fun idUserInfo(id : String) = firebaseRtdb.reference.child("allId").child(id)
+    fun nickNameInfo(nickname : String) = fireStore.collection("UserNickName")
 }
