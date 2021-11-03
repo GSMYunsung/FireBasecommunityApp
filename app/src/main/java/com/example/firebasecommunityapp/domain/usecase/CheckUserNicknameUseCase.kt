@@ -6,5 +6,5 @@ import javax.inject.Inject
 class CheckUserNicknameUseCase @Inject constructor(
     private val firebaseRepository : FirebaseRepository
 ) {
-    fun checkNickname(nickname : String) = firebaseRepository.nicknameInfo(nickname)
+    fun checkNickname() = firebaseRepository.nicknameInfo()
 }

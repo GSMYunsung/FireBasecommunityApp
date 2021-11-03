@@ -48,7 +48,6 @@ class SetIdPasswordFragment : Fragment() {
         }
         else{
 
-            setNextButtonColor()
 
             signInViewModel.idCheckNextCallUserInfo(binding.checkIdEditText.text.toString()).addListenerForSingleValueEvent(
                 object : ValueEventListener {

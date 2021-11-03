@@ -60,6 +60,8 @@ class SignUpViewmodel @Inject constructor(
     private val _checkSendCodeIs = MutableLiveData<Boolean>()
 
     init {
+        _checkUserNicknameIs.value = false
+        _checkUserPictureIs.value = false
         _checkGoNext.value = false
         _checkSendCodeIs.value = false
     }
@@ -109,7 +111,7 @@ class SignUpViewmodel @Inject constructor(
 
     fun phoneNumberCheckNextCallUserInfo() = checkUserInfoUseCase.excute()
 
-    fun nicknameCheckInfo(nickname : String) = checkUserNicknameUseCase.checkNickname(nickname)
+    fun nicknameCheckInfo() = checkUserNicknameUseCase.checkNickname()
 
     fun idCheckNextCallUserInfo(id : String) = checkUserIdInfoUseCase.excute(id)
 

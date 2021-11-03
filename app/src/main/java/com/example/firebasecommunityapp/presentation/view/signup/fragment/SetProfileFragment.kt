@@ -1,17 +1,9 @@
 package com.example.firebasecommunityapp.presentation.view.signup.fragment
 
-import android.app.Activity
-import android.app.Activity.RESULT_CANCELED
-import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
-import android.content.RestrictionsManager.RESULT_ERROR
-import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,31 +11,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.FragmentSetProfileBinding
 import com.example.firebasecommunityapp.presentation.view.main.activity.MainActivity
 import com.example.firebasecommunityapp.presentation.view.signup.SignUpViewmodel
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.getField
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.InputStream
-import java.lang.Exception
-import java.util.jar.Manifest
+import java.util.concurrent.Flow
 import java.util.regex.Pattern
-import javax.security.auth.AuthPermission
 
 
 @Suppress("DEPRECATION")
@@ -110,33 +89,39 @@ class SetProfileFragment : Fragment() {
 
     fun nickNameCheck(){
 
-       setNextButtonColor()
+        setNextButtonColor()
 
         if(TextUtils.isEmpty(binding.nicknameEditText.text)){
             Toast.makeText(activity,"닉네임을 입력해주세요!", Toast.LENGTH_SHORT).show()
         }
         else{
-            signInViewModel.nicknameCheckInfo(binding.nicknameEditText.text.toString()).addSnapshotListener { value, error ->
-                if (value != null) {
-                    Toast.makeText(activity, "이미 존재하는 닉네임 입니다. 다른 닉네임을 입력해주세요!", Toast.LENGTH_SHORT)
-                        .show()
-                    signInViewModel.checkNickNameProfileChange()
-                } else if (!Pattern.matches(
-                        "^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}\$\n",
-                        binding.nicknameEditText.text
-                    )
-                ) {
-                    Toast.makeText(
-                        activity,
-                        "형식에 맞지않는 id 입니다. 형식에 맞게 다시 입력해주세요",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    signInViewModel.checkNickNameProfileChange()
-                } else {
-                    Toast.makeText(activity, "사용가능한 닉네임 입니다.", Toast.LENGTH_SHORT).show()
-                    signInViewModel.checkNickNameIs()
-                }
-            }
+          signInViewModel.nicknameCheckInfo().addSnapshotListener { value, error ->
+
+
+              if (value?.data?.get(binding.nicknameEditText.text.toString()) != null) {
+                  Toast.makeText(activity, "이미 존재하는 닉네임 입니다. 다른 닉네임을 입력해주세요!", Toast.LENGTH_SHORT)
+                      .show()
+                  signInViewModel.checkNickNameProfileChange()
+              } else if (!Pattern.matches(
+                      "^[가-힣ㄱ-ㅎa-zA-Z0-9._-]{2,}\$",
+                      binding.nicknameEditText.text
+                  )
+              ) {
+                  Toast.makeText(
+                      activity,
+                      "형식에 맞지않는 id 입니다. 형식에 맞게 다시 입력해주세요",
+                      Toast.LENGTH_SHORT
+                  ).show()
+                  signInViewModel.checkNickNameProfileChange()
+              } else if(error != null){
+                  Toast.makeText(activity,"error :  $error",Toast.LENGTH_SHORT).show()
+              }
+
+              else {
+                  Toast.makeText(activity, "사용가능한 닉네임 입니다.", Toast.LENGTH_SHORT).show()
+                  signInViewModel.checkNickNameIs()
+              }
+          }
         }
     }
 
@@ -155,6 +140,6 @@ class SetProfileFragment : Fragment() {
     }
 
     fun setNextButtonColor(){
-        if(signInViewModel.checkUserNicknameIs.value == true && signInViewModel.checkUserPictureIs.value == true){binding.getStartButton.setBackgroundResource(R.color.backcolor)}
+        if(signInViewModel.checkUserNicknameIs.value == true && signInViewModel.checkUserPictureIs.value == true){binding.button.setBackgroundResource(R.color.backcolor)}
     }
 }
