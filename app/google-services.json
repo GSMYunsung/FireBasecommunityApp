@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "80006677290",
+    "firebase_url": "https://jab-chwi-default-rtdb.firebaseio.com",
     "project_id": "jab-chwi",
     "storage_bucket": "jab-chwi.appspot.com"
   },
