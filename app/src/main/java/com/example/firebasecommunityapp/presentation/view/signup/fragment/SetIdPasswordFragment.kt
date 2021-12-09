@@ -37,6 +37,12 @@ class SetIdPasswordFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_id_password, container, false)
 
+        signInViewModel.checkUserPasswordIs.observe(
+            viewLifecycleOwner, {
+                binding.nextButton.setBackgroundResource(R.color.backcolor)
+            }
+        )
+
         binding.nextFragment = this
 
         return binding.root
@@ -83,7 +89,7 @@ class SetIdPasswordFragment : Fragment() {
 
         val password = binding.checkPasswordEditText.text
 
-        setNextButtonColor()
+        //setNextButtonColor()
 
         if(TextUtils.isEmpty(binding.checkPasswordEditText.text.toString()) && TextUtils.isEmpty(binding.checkPasswordAgainEditText.text.toString())){
             Toast.makeText(activity,"비밀번호칸과 비밀번호 확인칸 모두 입력해주세요!",Toast.LENGTH_SHORT).show()
@@ -113,7 +119,7 @@ class SetIdPasswordFragment : Fragment() {
         }
     }
 
-    fun setNextButtonColor(){
-        if(signInViewModel.checkUserPasswordIs.value == true && signInViewModel.checkUserIdIs.value == true){binding.nextButton.setBackgroundResource(R.color.backcolor)}
-    }
+//    fun setNextButtonColor(){
+//        if(signInViewModel.checkUserPasswordIs.value == true && signInViewModel.checkUserIdIs.value == true){binding.nextButton.setBackgroundResource(R.color.backcolor)}
+//    }
 }
