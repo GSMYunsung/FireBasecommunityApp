@@ -24,11 +24,20 @@ class SignUpViewmodel @Inject constructor(
     private val checkUserNicknameUseCase: CheckUserNicknameUseCase
 ) : ViewModel() {
 
-    private var phoneNumber : String? = null
-    private var nickName : String? = null
-    private var password : String? = null
-    private var id : String? = null
-    private var profilePicture : String? = null
+    val phoneNumber: LiveData<String> get() = _phoneNumber
+    private val _phoneNumber = MutableLiveData<String>()
+
+    val nickName: LiveData<String> get() = _nickName
+    private val _nickName = MutableLiveData<String>()
+
+    val password: LiveData<String> get() = _password
+    private val _password = MutableLiveData<String>()
+
+    val id: LiveData<String> get() = _id
+    private val _id = MutableLiveData<String>()
+
+    val profilePicture: LiveData<String> get() = _profilePicture
+    private val _profilePicture = MutableLiveData<String>()
 
     //회원가입중 다음으로 버튼을 활성화
     val checkGoNext: LiveData<Boolean> get() = _checkGoNext
@@ -99,19 +108,19 @@ class SignUpViewmodel @Inject constructor(
     }
 
     fun getPhoneNumber(phoneNumber : String){
-        this.phoneNumber = phoneNumber
+        this._phoneNumber.value = phoneNumber
     }
 
     fun getIdAndPassword(id : String, password : String){
-        this.id = id
-        this.password = password
+        this._id.value = id
+        this._password.value = password
     }
 
     fun phoneNumberCheckNextCallUserInfo() = checkUserInfoUseCase.excute()
 
     fun nicknameCheckInfo() = checkUserNicknameUseCase.checkNickname()
 
-    fun idCheckNextCallUserInfo(id : String) = checkUserIdInfoUseCase.excute(id)
+    fun idCheckNextCallUserInfo() = checkUserIdInfoUseCase.excute()
 
     fun phoneNumberDoubleCheck(snapshot: DataSnapshot){
        if(snapshot.child(auth.uid.toString()).value != null){
@@ -134,8 +143,8 @@ class SignUpViewmodel @Inject constructor(
     }
 
     fun getNicknameAndProfileP(nickName : String, profilePicture : String){
-        this.nickName = nickName
-        this.profilePicture = profilePicture
+        this._nickName.value = nickName
+        this._profilePicture.value = profilePicture
     }
 
 }

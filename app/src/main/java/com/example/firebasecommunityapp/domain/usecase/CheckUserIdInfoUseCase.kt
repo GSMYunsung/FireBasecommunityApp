@@ -6,5 +6,5 @@ import javax.inject.Inject
 class CheckUserIdInfoUseCase @Inject constructor(
     private val firebaseRepository : FirebaseRepository
 ){
-    fun excute(id : String) = firebaseRepository.idUserInfo(id)
+    fun excute() = firebaseRepository.idUserInfo()
 }

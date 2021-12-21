@@ -16,12 +16,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.FragmentSetProfileBinding
-import com.example.firebasecommunityapp.presentation.view.main.activity.MainActivity
 import com.example.firebasecommunityapp.presentation.view.signup.SignUpViewmodel
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.firebase.firestore.ktx.getField
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.Flow
 import java.util.regex.Pattern
 
 
@@ -38,7 +35,7 @@ class SetProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_profile, container, false)
 
@@ -107,8 +104,8 @@ class SetProfileFragment : Fragment() {
             Toast.makeText(activity, "닉네임을 입력해주세요!", Toast.LENGTH_SHORT).show()
         } else {
             signInViewModel.nicknameCheckInfo().addOnSuccessListener {
-                for (i in 0..it.size()-1) {
-                    if (it.documents.get(i).id == binding.nicknameEditText.text.toString()) {
+                for (i in 0 until it.size()) {
+                    if (it.documents[i].id == binding.nicknameEditText.text.toString()) {
                         Toast.makeText(
                             activity,
                             "이미 존재하는 닉네임 입니다. 다른 닉네임을 입력해주세요!",
@@ -125,7 +122,7 @@ class SetProfileFragment : Fragment() {
                         ).show()
                         signInViewModel.checkNickNameProfileChange()
                     }
-                    else {
+                    else{
                         Toast.makeText(activity, "사용가능한 닉네임 입니다.", Toast.LENGTH_SHORT).show()
                         signInViewModel.checkNickNameIs()
                     }
@@ -140,6 +137,7 @@ class SetProfileFragment : Fragment() {
                     binding.nicknameEditText.text.toString(),
                     binding.profileImageView.toString()
                 )
+
             } else {
                 Toast.makeText(activity, "우선모든 빈칸을 완료해주세요!", Toast.LENGTH_SHORT).show()
             }

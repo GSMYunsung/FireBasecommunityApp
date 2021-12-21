@@ -14,6 +14,6 @@ class RemoteFirebaseRepositoryImpl @Inject constructor(
     private val fireBaseSource: RemoteFirebaseDataSource
 ) : FirebaseRepository {
     override fun callUserInfo(): DatabaseReference = fireBaseSource.callUserInfo()
-    override fun idUserInfo(id : String): DatabaseReference = fireBaseSource.idUserInfo(id)
+    override fun idUserInfo(): Task<QuerySnapshot> = fireBaseSource.idUserInfo()
     override fun nicknameInfo(): Task<QuerySnapshot> = fireBaseSource.nickNameInfo()
 }
