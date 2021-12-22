@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.ActivityIntroBinding
+import com.example.firebasecommunityapp.presentation.view.main.activity.MainActivity
 import com.example.firebasecommunityapp.presentation.view.signup.activity.SignUpActivity
 
 class IntroActivity : AppCompatActivity() {
@@ -20,5 +21,9 @@ class IntroActivity : AppCompatActivity() {
 
     fun signUpPage(){
         startActivity(Intent(this, SignUpActivity::class.java))
+    }
+
+    fun goMainPage(){
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

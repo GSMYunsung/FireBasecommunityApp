@@ -1,5 +1,6 @@
 package com.example.firebasecommunityapp.data.repository
 
+import com.example.firebasecommunityapp.data.model.UserData
 import com.example.firebasecommunityapp.data.repository.datasource.RemoteFirebaseDataSource
 import com.example.firebasecommunityapp.domain.repository.FirebaseRepository
 import com.google.android.gms.tasks.Task
@@ -16,4 +17,6 @@ class RemoteFirebaseRepositoryImpl @Inject constructor(
     override fun callUserInfo(): DatabaseReference = fireBaseSource.callUserInfo()
     override fun idUserInfo(): Task<QuerySnapshot> = fireBaseSource.idUserInfo()
     override fun nicknameInfo(): Task<QuerySnapshot> = fireBaseSource.nickNameInfo()
+    override fun postUserInformation(userinfo : UserData) = fireBaseSource.postUserInformation(userinfo)
+
 }

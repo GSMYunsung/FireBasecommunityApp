@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.firebasecommunityapp.R
+import com.example.firebasecommunityapp.data.model.UserData
 import com.example.firebasecommunityapp.databinding.FragmentSetProfileBinding
 import com.example.firebasecommunityapp.presentation.view.signup.SignUpViewmodel
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -138,6 +139,14 @@ class SetProfileFragment : Fragment() {
                     binding.profileImageView.toString()
                 )
 
+                signInViewModel.saveUserInformation(UserData(
+                    signInViewModel.phoneNumber.value!!,
+                    signInViewModel.nickName.value!!,
+                    signInViewModel.password.value!!,
+                    signInViewModel.id.value!!,
+                    signInViewModel.profilePicture.value!!))
+
+                requireActivity().finish()
             } else {
                 Toast.makeText(activity, "우선모든 빈칸을 완료해주세요!", Toast.LENGTH_SHORT).show()
             }

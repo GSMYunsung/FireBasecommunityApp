@@ -1,15 +1,14 @@
 package com.example.firebasecommunityapp.presentation.view.signup
 
-import android.net.Uri
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.firebasecommunityapp.data.model.SingUp
-import com.example.firebasecommunityapp.domain.repository.FirebaseRepository
+import com.example.firebasecommunityapp.data.model.UserData
 import com.example.firebasecommunityapp.domain.usecase.CheckUserIdInfoUseCase
 import com.example.firebasecommunityapp.domain.usecase.CheckUserInfoUseCase
 import com.example.firebasecommunityapp.domain.usecase.CheckUserNicknameUseCase
+import com.example.firebasecommunityapp.domain.usecase.PostUserInformationUseCase
 import com.example.firebasecommunityapp.presentation.wiget.utils.UserProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -21,7 +20,8 @@ class SignUpViewmodel @Inject constructor(
     private var auth: FirebaseAuth,
     private val checkUserInfoUseCase: CheckUserInfoUseCase,
     private val checkUserIdInfoUseCase: CheckUserIdInfoUseCase,
-    private val checkUserNicknameUseCase: CheckUserNicknameUseCase
+    private val checkUserNicknameUseCase: CheckUserNicknameUseCase,
+    private val postUserInfoUseCase : PostUserInformationUseCase
 ) : ViewModel() {
 
     val phoneNumber: LiveData<String> get() = _phoneNumber
@@ -107,6 +107,10 @@ class SignUpViewmodel @Inject constructor(
         _checkGoNext.value= true
     }
 
+    fun saveUserInformation(userinfo : UserData) = postUserInfoUseCase.postUserInformation(userinfo)
+        .addOnSuccessListener {  }
+        .addOnFailureListener {  }
+
     fun getPhoneNumber(phoneNumber : String){
         this._phoneNumber.value = phoneNumber
     }
@@ -124,7 +128,7 @@ class SignUpViewmodel @Inject constructor(
 
     fun phoneNumberDoubleCheck(snapshot: DataSnapshot){
        if(snapshot.child(auth.uid.toString()).value != null){
-            val userSignUpmModel = snapshot.child(auth.uid.toString()).getValue(SingUp::class.java)
+            val userSignUpmModel = snapshot.child(auth.uid.toString()).getValue(UserData::class.java)
 
             UserProfile.apply {
                 phoneNumber = userSignUpmModel?.phoneNumber

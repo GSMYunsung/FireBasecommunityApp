@@ -1,5 +1,6 @@
 package com.example.firebasecommunityapp.domain.repository
 
+import com.example.firebasecommunityapp.data.model.UserData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.CollectionReference
@@ -13,4 +14,5 @@ interface FirebaseRepository {
     fun callUserInfo() : DatabaseReference
     fun idUserInfo() : Task<QuerySnapshot>
     fun nicknameInfo() :Task<QuerySnapshot>
+    fun postUserInformation(userinfo : UserData): Task<Void>
 }
