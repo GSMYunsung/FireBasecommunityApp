@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
             mBackWait = System.currentTimeMillis()
             Snackbar.make(binding.mainConstraint,"뒤로가기 버튼을 한번 더 누르면 종료됩니다.",Snackbar.LENGTH_LONG).show()
         } else {
-            //앱 끝내는 코드
+            moveTaskToBack(true); // 태스크를 백그라운드로 이동
+            finishAndRemoveTask(); // 액티비티 종료 + 태스크 리스트에서 지우기
+            android.os.Process.killProcess(android.os.Process.myPid())
         }
     }
 
