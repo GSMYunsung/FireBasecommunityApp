@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.signup.activity.SignUpActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/login_nav_host_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
