@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".presentation.wiget.JabchwiApplication"
-        android:theme="@style/Theme.Design.NoActionBar">
+        android:theme="@style/Theme.Design.Light">
         <activity android:name="com.example.firebasecommunityapp.presentation.view.signup.activity.SignUpActivity">
         </activity>
         <activity android:name="com.example.firebasecommunityapp.presentation.view.login.IntroActivity" />
