@@ -1,21 +1,20 @@
 package com.example.firebasecommunityapp.presentation.view.main.activity
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.firebasecommunityapp.R
-import com.example.firebasecommunityapp.databinding.ActivityIntroBinding
-import com.example.firebasecommunityapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.firebasecommunityapp.R
+import com.example.firebasecommunityapp.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,11 +27,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.hide()
+
         navi = binding.bottomNav
-        navController = findNavController(R.id.fragment)
+        navController = supportFragmentManager.findFragmentById(R.id.nav_host)!!.findNavController()
         //앱 바 구성성
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigation() {
-        val navController = findNavController(R.id.fragment)
+        val navController = findNavController(R.id.nav_host)
         binding.bottomNav.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
