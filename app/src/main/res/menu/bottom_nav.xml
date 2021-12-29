@@ -3,25 +3,25 @@
     <item
         android:id="@+id/mainFragment"
         android:icon="@drawable/mainhome"
-        android:title="Home" />
+        android:title="" />
     <item
         android:id="@+id/shoppingFragment"
         android:icon="@drawable/shopping"
-        android:title="Shopping" />
+        android:title="" />
 
     <item
         android:id="@+id/communityFragment"
         android:icon="@drawable/community"
-        android:title="Community" />
+        android:title="" />
 
 
     <item
         android:id="@+id/mapFragment"
         android:icon="@drawable/map"
-        android:title="Map" />
+        android:title="" />
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/user"
-        android:title="Profile" />
+        android:title="" />
 </menu>
