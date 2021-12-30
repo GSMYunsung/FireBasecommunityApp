@@ -1,5 +1,6 @@
 package com.example.firebasecommunityapp.presentation.view.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -20,6 +21,7 @@ class MainCatagoryAdapter(category: ArrayList<String>) : RecyclerView.Adapter<Ma
         val itemCatagoryText = itemView.findViewById<TextView>(R.id.catagory_text)
 
             fun onClick(){
+                //
             }
 
     }
@@ -30,6 +32,7 @@ class MainCatagoryAdapter(category: ArrayList<String>) : RecyclerView.Adapter<Ma
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.onClick()
+        Log.d("dsaffds", category.toString())
         holder.itemCatagoryText.setText(category[position])
     }
 
