@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.FragmentMainBinding
 import com.example.firebasecommunityapp.databinding.FragmentProfileBinding
@@ -22,6 +23,7 @@ class ProfileFragment : Fragment() {
 
         binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
+        binding.constraintLayout6.setOnClickListener { findNavController().navigate(R.id.action_profileFragment_to_FAQsFragment) }
 
 //        countNumber(0,130,binding.textView11,3000)
 

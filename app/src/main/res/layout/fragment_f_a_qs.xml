@@ -19,13 +19,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/back_btn"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="start"
-                android:layout_marginEnd="20dp"
-                android:src="@color/black" />
+           <ImageView
+               android:id="@+id/back_arrow"
+               android:src="@drawable/back_arrow"
+               android:layout_width="30dp"
+               android:layout_height="30dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,17 +37,72 @@
         </androidx.appcompat.widget.Toolbar>
 
         <TextView
+            android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="84dp"
+            android:layout_marginTop="68dp"
             android:fontFamily="@font/sb_l"
-            android:text="자취하는 멋진 우리, \n 처음이지만 능숙하게"
+            android:text="자주하는 질문,\n여기서 확인하세요"
             android:textColor="@color/black"
             android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:fontFamily="@font/sb_l"
+            android:text="이 앱을 만들게된 계기"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/sb_l"
+            android:text="내 주변 꿀 지도 사용법은?"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/sb_l"
+            android:text="실시간으로 인기 자취 꿀탬 100% 확인하기?"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sb_l"
+            android:layout_marginTop="40dp"
+            android:text="개발자 보러가기"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
