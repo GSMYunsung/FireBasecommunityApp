@@ -1,10 +1,14 @@
 package com.example.firebasecommunityapp.presentation.view.main.activity
 
 
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -17,6 +21,8 @@ import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
+import java.security.MessageDigest
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -25,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     var mBackWait:Long = 0
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
@@ -83,3 +90,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+/// 안드로이드 Hash Key 받아오기
+
+/// try{
+//
+//            val info = packageManager.getPackageInfo(packageName,PackageManager.GET_SIGNING_CERTIFICATES)
+//            val signatures = info.signingInfo.apkContentsSigners
+//            val md = MessageDigest.getInstance("SHA")
+//            for(signature in signatures){
+//                val md : MessageDigest
+//                md = MessageDigest.getInstance("SHA")
+//                md.update(signature.toByteArray())
+//                val key = String(Base64.encode(md.digest(),0))
+//                Log.d("Hash key : ", "!!!!!!!$key!!!!!!!!!")
+//            }
+//        } catch (e : Exception){
+//            Log.e("name not found", e.toString())
+//        }

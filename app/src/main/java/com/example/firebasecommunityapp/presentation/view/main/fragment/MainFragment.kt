@@ -9,6 +9,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firebasecommunityapp.R
 import com.example.firebasecommunityapp.databinding.FragmentMainBinding
+import android.content.pm.PackageManager
+
+import android.content.pm.PackageInfo
+import android.util.Base64
+import android.util.Log
+import com.google.common.reflect.Reflection.getPackageName
+import java.lang.Exception
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class MainFragment : Fragment() {
