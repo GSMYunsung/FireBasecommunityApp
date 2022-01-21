@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:fontFamily="@font/sb_l"
-                    android:text="오늘의 Hot Point 🔥"
+                    android:text="우리집은 맥, 스, 편 세권일까 🔥"
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"
