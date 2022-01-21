@@ -61,9 +61,21 @@
         <action
             android:id="@+id/action_mapFragment_to_communityFragment"
             app:destination="@id/communityFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_mapFindFragment"
+            app:destination="@id/mapFindFragment" />
     </fragment>
     <fragment
         android:id="@+id/FAQsFragment"
         android:name="com.example.firebasecommunityapp.presentation.view.profile.fragment.FAQsFragment"
         android:label="FAQsFragment" />
+    <fragment
+        android:id="@+id/mapFindFragment"
+        android:name="com.example.firebasecommunityapp.presentation.view.map.MapFindFragment"
+        android:label="fragment_map_find"
+        tools:layout="@layout/fragment_map_find" >
+        <action
+            android:id="@+id/action_mapFindFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
 </navigation>
